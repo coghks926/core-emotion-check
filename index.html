@@ -469,10 +469,17 @@
             flex-shrink: 0;
         }
 
+        .emotion-name {
+            font-size: clamp(15px, 3vw, 18px);
+            font-weight: 800;
+            color: var(--primary-dark);
+        }
+
         .emotion-checked-count {
             font-size: clamp(13px, 2.5vw, 15px);
             color: #9ca3af;
             font-weight: 600;
+            margin-left: auto;
         }
 
         .emotion-checked-count.has-count {
@@ -569,6 +576,40 @@
         .check-item.checked .check-label {
             color: var(--primary-dark);
             font-weight: 600;
+        }
+
+        .na-item {
+            background: #f8fafc;
+            border: 1.5px dashed #cbd5e1;
+            justify-content: center;
+        }
+
+        .na-item:hover {
+            background: #f1f5f9;
+            border-color: #94a3b8;
+        }
+
+        .na-item.checked {
+            background: #f1f5f9;
+            border-color: #64748b;
+        }
+
+        .na-item .custom-check {
+            border-color: #94a3b8;
+        }
+
+        .na-item.checked .custom-check {
+            background: #64748b;
+            border-color: #64748b;
+        }
+
+        .na-item .check-label {
+            color: #64748b;
+            font-size: clamp(12px, 2.2vw, 14px);
+        }
+
+        .na-item.checked .check-label {
+            color: #475569;
         }
 
         /* ===== RESULT ===== */
@@ -1179,6 +1220,9 @@
                             <input type="checkbox" id="u-consent" class="consent-checkbox">
                             개인정보 수집 및 이용에 동의합니다
                         </label>
+                        <p style="margin-top:0.5rem; font-size:clamp(11px, 1.8vw, 13px); color:#94a3b8; line-height:1.5;">
+                            수집된 개인정보는 검사 결과 분석 목적으로만 사용되며, 그 외의 용도로는 절대 활용되지 않습니다.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1530,29 +1574,40 @@ function renderEmotionCards() {
     if (container.children.length > 0) return;
 
     container.innerHTML = '';
-    emotionsData.forEach(emotion => {
+    emotionsData.forEach((emotion, idx) => {
         const card = document.createElement('div');
         card.className = 'emotion-card';
         card.id = `emotion-${emotion.id}`;
+        const eName = emotionNames[idx];
 
         let categoriesHTML = '';
         for (const [catName, items] of Object.entries(emotion.categories)) {
             const catClass = categoryClasses[catName] || '';
+            const catSafe = catName.replace(/\//g, '_');
             let itemsHTML = '';
-            items.forEach((item, idx) => {
-                const checkId = `e${emotion.id}_${catName.replace(/\//g, '_')}_${idx}`;
+            items.forEach((item, i) => {
+                const checkId = `e${emotion.id}_${catSafe}_${i}`;
                 itemsHTML += `
                     <label class="check-item" for="${checkId}" onclick="toggleCheck(this)">
-                        <input type="checkbox" id="${checkId}" data-emotion="${emotion.id}">
+                        <input type="checkbox" id="${checkId}" data-emotion="${emotion.id}" data-category="${catName}">
                         <span class="custom-check">
                             <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                         </span>
                         <span class="check-label">${item}</span>
                     </label>`;
             });
+            const naId = `e${emotion.id}_${catSafe}_na`;
+            itemsHTML += `
+                    <label class="check-item na-item" for="${naId}" onclick="toggleNA(this)">
+                        <input type="checkbox" id="${naId}" data-emotion="${emotion.id}" data-category="${catName}" data-na="true">
+                        <span class="custom-check">
+                            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                        </span>
+                        <span class="check-label">해당없음</span>
+                    </label>`;
             categoriesHTML += `
                 <div class="category-group">
-                    <div class="category-label ${catClass}">${catName}</div>
+                    <div class="category-label ${catClass}">${catName}에서의 ${eName}</div>
                     <div class="items-grid">${itemsHTML}</div>
                 </div>`;
         }
@@ -1560,6 +1615,7 @@ function renderEmotionCards() {
         card.innerHTML = `
             <div class="emotion-header">
                 <div class="emotion-number">${emotion.id}</div>
+                <div class="emotion-name">${eName}</div>
                 <div class="emotion-checked-count" id="count-${emotion.id}">0개 선택</div>
             </div>
             ${categoriesHTML}`;
@@ -1573,6 +1629,28 @@ function toggleCheck(label) {
         const cb = label.querySelector('input[type="checkbox"]');
         if (cb.checked) {
             label.classList.add('checked');
+            const naBox = document.querySelector(`input[data-emotion="${cb.dataset.emotion}"][data-category="${cb.dataset.category}"][data-na]`);
+            if (naBox && naBox.checked) {
+                naBox.checked = false;
+                naBox.closest('.na-item').classList.remove('checked');
+            }
+        } else {
+            label.classList.remove('checked');
+        }
+        updateCounts();
+    }, 10);
+}
+
+function toggleNA(label) {
+    setTimeout(() => {
+        const cb = label.querySelector('input[type="checkbox"]');
+        if (cb.checked) {
+            label.classList.add('checked');
+            const regularBoxes = document.querySelectorAll(`input[data-emotion="${cb.dataset.emotion}"][data-category="${cb.dataset.category}"]:not([data-na])`);
+            regularBoxes.forEach(rcb => {
+                rcb.checked = false;
+                rcb.closest('.check-item').classList.remove('checked');
+            });
         } else {
             label.classList.remove('checked');
         }
@@ -1583,7 +1661,7 @@ function toggleCheck(label) {
 function updateCounts() {
     let emotionsWithChecks = 0;
     emotionsData.forEach(emotion => {
-        const checks = document.querySelectorAll(`input[data-emotion="${emotion.id}"]:checked`);
+        const checks = document.querySelectorAll(`input[data-emotion="${emotion.id}"]:checked:not([data-na])`);
         const count = checks.length;
         const countEl = document.getElementById(`count-${emotion.id}`);
         if (countEl) {
@@ -1608,7 +1686,7 @@ function updateCounts() {
 function getResults() {
     const results = [];
     emotionsData.forEach((emotion, i) => {
-        const checks = document.querySelectorAll(`input[data-emotion="${emotion.id}"]:checked`);
+        const checks = document.querySelectorAll(`input[data-emotion="${emotion.id}"]:checked:not([data-na])`);
         results.push({ id: emotion.id, name: emotionNames[i], count: checks.length });
     });
     return results;
