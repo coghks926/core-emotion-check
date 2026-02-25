@@ -2,13 +2,41 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>핵심감정 자가진단</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+            -moz-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
+        input,
+        select,
+        textarea,
+        button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            font: inherit;
+        }
+
+        input[type="radio"] {
+            -webkit-appearance: radio;
+            -moz-appearance: radio;
+            appearance: radio;
+        }
+
+        input[type="checkbox"] {
+            -webkit-appearance: checkbox;
+            -moz-appearance: checkbox;
+            appearance: checkbox;
         }
 
         :root {
@@ -30,7 +58,10 @@
             min-height: 100vh;
             color: #1f2937;
             line-height: 1.6;
-            padding: 2rem 1rem;
+            padding-top: 2rem;
+            padding-left: max(1rem, env(safe-area-inset-left));
+            padding-right: max(1rem, env(safe-area-inset-right));
+            padding-bottom: max(2rem, env(safe-area-inset-bottom));
             overflow-x: hidden;
             word-wrap: break-word;
             word-break: keep-all;
@@ -116,7 +147,7 @@
         }
 
         .header .subtitle {
-            font-size: clamp(14px, 3vw, 18px);
+            font-size: clamp(15px, 3.2vw, 20px);
             color: #64748b;
             font-weight: 500;
         }
@@ -147,7 +178,7 @@
         }
 
         .section-header .subtitle-text {
-            font-size: clamp(13px, 2.6vw, 17px);
+            font-size: clamp(14px, 2.8vw, 18px);
             color: #475569;
             line-height: 1.6;
             display: flex;
@@ -185,7 +216,7 @@
         }
 
         .intro-section p {
-            font-size: clamp(14px, 2.5vw, 16px);
+            font-size: clamp(15px, 2.7vw, 18px);
             color: #475569;
             line-height: 1.7;
             margin-bottom: 0.4rem;
@@ -219,7 +250,7 @@
             display: flex;
             align-items: flex-start;
             gap: .75rem;
-            font-size: clamp(14px, 2.5vw, 17px);
+            font-size: clamp(15px, 2.7vw, 18px);
             color: #1f2937;
             line-height: 1.6;
         }
@@ -303,7 +334,7 @@
         }
 
         .radio-label span {
-            font-size: clamp(14px, 2.2vw, 16px);
+            font-size: clamp(15px, 2.4vw, 17px);
             color: #334155;
         }
 
@@ -319,7 +350,7 @@
             gap: .6rem;
             align-items: center;
             cursor: pointer;
-            font-size: clamp(13px, 2.1vw, 15px);
+            font-size: clamp(14px, 2.3vw, 16px);
             color: #475569;
         }
 
@@ -348,7 +379,7 @@
             margin-top: clamp(2.5rem, 5vw, 3.5rem);
             flex-wrap: wrap;
             position: sticky;
-            bottom: 1rem;
+            bottom: max(1rem, env(safe-area-inset-bottom));
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             padding: 1rem 2rem;
@@ -366,7 +397,7 @@
             border: none;
             border-radius: 1rem;
             padding: 1rem 2rem;
-            font-size: clamp(15px, 3vw, 17px);
+            font-size: clamp(16px, 3.2vw, 18px);
             font-weight: 700;
             cursor: pointer;
             box-shadow: var(--shadow-md);
@@ -409,13 +440,13 @@
         .progress-text {
             font-weight: 700;
             color: #1f2937;
-            font-size: clamp(13px, 2.5vw, 15px);
+            font-size: clamp(14px, 2.7vw, 16px);
         }
 
         .progress-percentage {
             font-weight: 800;
             color: var(--primary);
-            font-size: clamp(14px, 3vw, 18px);
+            font-size: clamp(15px, 3.2vw, 19px);
         }
 
         .progress-track {
@@ -470,13 +501,13 @@
         }
 
         .emotion-name {
-            font-size: clamp(15px, 3vw, 18px);
+            font-size: clamp(17px, 3.2vw, 20px);
             font-weight: 800;
             color: var(--primary-dark);
         }
 
         .emotion-checked-count {
-            font-size: clamp(13px, 2.5vw, 15px);
+            font-size: clamp(14px, 2.6vw, 16px);
             color: #9ca3af;
             font-weight: 600;
             margin-left: auto;
@@ -494,7 +525,7 @@
             display: inline-block;
             padding: 0.25rem 0.7rem;
             border-radius: 0.5rem;
-            font-size: clamp(11px, 1.8vw, 13px);
+            font-size: clamp(12px, 2vw, 14px);
             font-weight: 700;
             margin-bottom: 0.5rem;
             color: white;
@@ -568,7 +599,7 @@
         .check-item.checked .custom-check svg { opacity: 1; }
 
         .check-label {
-            font-size: clamp(14px, 2.8vw, 16px);
+            font-size: clamp(15px, 3vw, 18px);
             color: #374151;
             line-height: 1.4;
         }
@@ -605,7 +636,7 @@
 
         .na-item .check-label {
             color: #64748b;
-            font-size: clamp(12px, 2.2vw, 14px);
+            font-size: clamp(13px, 2.4vw, 15px);
         }
 
         .na-item.checked .check-label {
@@ -879,7 +910,12 @@
 
         /* 태블릿 */
         @media (max-width: 768px) {
-            body { padding: 1rem 0.5rem; }
+            body {
+                padding-top: 1rem;
+                padding-left: max(0.5rem, env(safe-area-inset-left));
+                padding-right: max(0.5rem, env(safe-area-inset-right));
+                padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+            }
             .container { max-width: 100%; }
             .page-center { max-width: 100%; }
 
@@ -906,7 +942,7 @@
             }
 
             .check-item { padding: 0.4rem 0.5rem; }
-            .check-label { font-size: clamp(13px, 2.8vw, 15px); }
+            .check-label { font-size: clamp(14px, 3vw, 16px); }
             .custom-check { width: 16px; height: 16px; }
             .custom-check svg { width: 10px; height: 10px; }
 
@@ -919,10 +955,11 @@
             .emotion-header { gap: 0.6rem; margin-bottom: 0.8rem; }
             .emotion-number { width: 34px; height: 34px; font-size: 0.95rem; border-radius: 10px; }
             .category-group { margin-bottom: 0.6rem; }
-            .category-label { font-size: 11px; padding: 0.2rem 0.6rem; }
+            .category-label { font-size: 12px; padding: 0.25rem 0.65rem; }
 
             .actions-sticky {
                 padding: 0.8rem 1rem;
+                padding-bottom: max(0.8rem, calc(0.8rem + env(safe-area-inset-bottom)));
                 margin-left: -1.5rem;
                 margin-right: -1.5rem;
                 margin-bottom: -1.5rem;
@@ -934,7 +971,7 @@
                 flex: 0 1 auto;
                 min-width: 100px;
                 padding: 0.8rem 1.2rem;
-                font-size: clamp(13px, 2.5vw, 15px);
+                font-size: clamp(14px, 2.7vw, 16px);
                 justify-content: center;
             }
 
@@ -957,30 +994,35 @@
 
             .info-block { padding: 1rem; }
             .info-title { font-size: clamp(14px, 2.5vw, 17px); }
-            .info-item { font-size: clamp(13px, 2.2vw, 15px); }
+            .info-item { font-size: clamp(14px, 2.4vw, 16px); }
 
             .completion-icon { font-size: 60px; }
-            .completion-message { font-size: clamp(14px, 2.5vw, 18px); }
+            .completion-message { font-size: clamp(15px, 2.7vw, 19px); }
 
             .strategy-item { padding: 1rem; }
             .strategy-number { font-size: clamp(14px, 2.5vw, 16px); }
 
             .intro-section { padding: 1.5rem; }
             .intro-section h2 { font-size: clamp(18px, 4vw, 22px); }
-            .intro-section p { font-size: clamp(13px, 2.3vw, 15px); }
+            .intro-section p { font-size: clamp(14px, 2.5vw, 16px); }
 
             .user-form-grid { gap: 1rem; }
             .consent-box { padding: 1rem; }
 
             .btn {
                 padding: 0.8rem 1.5rem;
-                font-size: clamp(14px, 2.5vw, 16px);
+                font-size: clamp(15px, 2.7vw, 17px);
             }
         }
 
         /* 소형 모바일 */
         @media (max-width: 480px) {
-            body { padding: 0.75rem 0.4rem; }
+            body {
+                padding-top: 0.75rem;
+                padding-left: max(0.4rem, env(safe-area-inset-left));
+                padding-right: max(0.4rem, env(safe-area-inset-right));
+                padding-bottom: max(1rem, env(safe-area-inset-bottom));
+            }
 
             .page.active {
                 min-height: calc(100vh - 1.5rem);
@@ -994,10 +1036,10 @@
 
             .header { margin-bottom: 1.2rem; }
             .header h1 { font-size: clamp(22px, 6vw, 30px); margin-bottom: 0.4rem; }
-            .header .subtitle { font-size: clamp(13px, 2.5vw, 15px); }
+            .header .subtitle { font-size: clamp(14px, 2.7vw, 16px); }
 
             .section-header .title-main { font-size: clamp(20px, 5vw, 26px); }
-            .section-header .subtitle-text { font-size: clamp(12px, 2.5vw, 14px); }
+            .section-header .subtitle-text { font-size: clamp(13px, 2.7vw, 15px); }
 
             .items-grid {
                 grid-template-columns: 1fr 1fr;
@@ -1005,12 +1047,12 @@
             }
 
             .check-item { padding: 0.35rem 0.4rem; gap: 0.35rem; }
-            .check-label { font-size: clamp(13px, 3vw, 14px); }
+            .check-label { font-size: clamp(14px, 3.2vw, 15px); }
 
             .emotion-card { padding: 0.8rem; margin-bottom: 0.6rem; }
             .emotion-header { margin-bottom: 0.6rem; }
             .emotion-number { width: 30px; height: 30px; font-size: 0.85rem; border-radius: 8px; }
-            .emotion-checked-count { font-size: clamp(11px, 2.2vw, 13px); }
+            .emotion-checked-count { font-size: clamp(12px, 2.4vw, 14px); }
 
             .actions-sticky {
                 margin-left: -1.2rem;
@@ -1018,12 +1060,13 @@
                 margin-bottom: -1.2rem;
                 border-radius: 0 0 1.2rem 1.2rem;
                 padding: 0.7rem 0.8rem;
+                padding-bottom: max(0.7rem, calc(0.7rem + env(safe-area-inset-bottom)));
             }
 
             .actions-sticky .btn {
                 min-width: 90px;
                 padding: 0.7rem 1rem;
-                font-size: 13px;
+                font-size: 14px;
                 border-radius: 0.75rem;
             }
 
@@ -1057,14 +1100,14 @@
             .intro-section { padding: 1.2rem; margin-bottom: 1.2rem; }
             .info-block { padding: 0.8rem; gap: 0.6rem; }
             .info-title { font-size: clamp(13px, 2.5vw, 16px); }
-            .info-item { font-size: clamp(12px, 2.2vw, 14px); gap: 0.5rem; }
+            .info-item { font-size: clamp(13px, 2.4vw, 15px); gap: 0.5rem; }
 
             .completion-icon { font-size: 50px; }
 
             .user-radio-group { height: 44px; }
             .user-select { height: 44px; font-size: 15px; }
             .consent-box { padding: 0.8rem; }
-            .consent-label { font-size: clamp(12px, 2.2vw, 14px); }
+            .consent-label { font-size: clamp(13px, 2.4vw, 15px); }
 
             .progress-bar { padding: 0.6rem; border-radius: 0.75rem; }
             .progress-track { height: 8px; }
@@ -1072,7 +1115,12 @@
 
         /* 매우 작은 화면 (SE 등) */
         @media (max-width: 360px) {
-            body { padding: 0.5rem 0.3rem; }
+            body {
+                padding-top: 0.5rem;
+                padding-left: max(0.3rem, env(safe-area-inset-left));
+                padding-right: max(0.3rem, env(safe-area-inset-right));
+                padding-bottom: max(0.8rem, env(safe-area-inset-bottom));
+            }
 
             .card { padding: 1rem; border-radius: 1rem; }
 
@@ -1084,7 +1132,7 @@
             }
 
             .check-item { padding: 0.4rem 0.5rem; }
-            .check-label { font-size: 12px; }
+            .check-label { font-size: 13px; }
 
             .emotion-number { width: 28px; height: 28px; font-size: 0.8rem; }
 
@@ -1094,26 +1142,27 @@
                 margin-bottom: -1rem;
                 border-radius: 0 0 1rem 1rem;
                 padding: 0.6rem 0.7rem;
+                padding-bottom: max(0.6rem, calc(0.6rem + env(safe-area-inset-bottom)));
             }
 
             .actions-sticky .btn {
                 min-width: 80px;
                 padding: 0.6rem 0.8rem;
-                font-size: 12px;
+                font-size: 13px;
             }
 
             .btn {
                 padding: 0.7rem 1.2rem;
-                font-size: 14px;
+                font-size: 15px;
                 border-radius: 0.75rem;
             }
 
             .top-badge { font-size: 12px; padding: 0.45rem 0.8rem; }
 
             .intro-section { padding: 1rem; }
-            .intro-section p { font-size: 12px; }
+            .intro-section p { font-size: 13px; }
 
-            .insight-box p { font-size: 12px; }
+            .insight-box p { font-size: 13px; }
             .detail-tag { font-size: 10px; }
         }
 
@@ -1391,15 +1440,15 @@ const emotionsData = [
         id: 1,
         categories: {
             "대인관계": ["위축되어있다", "긴장되어있다", "요구를 못한다", "거절을 못한다"],
-            "가족관계": ["집에서는 파김치다", "늘 지쳐있다", "눈치 보게한다", "함께 자리하기를 피한다"],
+            "가족관계": ["집에서는 파김치가 된다", "늘 지쳐있다", "눈치 보게한다", "함께 자리하기를 피한다"],
             "일/공부": ["잘 하려고한다", "혼자 다한다", "할 일이 산더미같이 쌓여있다"],
-            "강점": ["열심히 산다", "맡은바를 다한다", "든든하다"]
+            "강점": ["열심히 산다", "맡은바 최선을 다한다", "든든하다"]
         }
     },
     {
         id: 2,
         categories: {
-            "대인관계": ["이기려고 한다", "지고는 못산다", "조급하다", "전투적이다"],
+            "대인관계": ["이기려고 한다", "지고는 못 산다", "조급하다", "전투적이다"],
             "가족관계": ["비교를 잘한다", "무시한다", "표현이 자극적이다", "경쟁대상으로 본다"],
             "일/공부": ["1등이 되어야한다", "상대가 있으면 더 잘한다", "이기는 데에만 집중한다", "사소한 일에 목숨건다"],
             "강점": ["집중력이 있다", "포기하지 않는다", "성공지향적이다"]
@@ -1409,7 +1458,7 @@ const emotionsData = [
         id: 3,
         categories: {
             "대인관계": ["남의 탓을 잘한다", "건드리면 터진다", "권위에 반항적이다", "자존감이 낮아 상처를 잘받는다"],
-            "가족관계": ["조종하려 한다", "지배하려한다", "책임지려한다", "인정안해주면 화를 낸다"],
+            "가족관계": ["조종하려 한다", "지배하려 한다", "책임지려 한다", "인정안해주면 화를 낸다"],
             "일/공부": ["확실하다", "장단점 파악을 잘 한다", "조직관리능력이 있다"],
             "강점": ["의리 있다", "정의감 있다", "설득을 잘 한다"]
         }
@@ -1418,7 +1467,7 @@ const emotionsData = [
         id: 4,
         categories: {
             "대인관계": ["소심하다", "기가 죽어있다", "인정받으려고 애쓴다", "경쟁적이다"],
-            "가족관계": ["비난한다", "마음에 안들어한다", "헌신적이다", "잘하도록 부추긴다"],
+            "가족관계": ["비난한다", "마음에 안 들어 한다", "헌신적이다", "잘하도록 부추긴다"],
             "일/공부": ["자책한다", "책임감있다", "잘하려고 기를 쓴다", "쉽게 포기한다"],
             "강점": ["자기 자신을 잘 안다", "반성능력이 있다", "비교분석을 잘한다", "끊임없이 자기개발을 한다"]
         }
@@ -1444,10 +1493,10 @@ const emotionsData = [
     {
         id: 7,
         categories: {
-            "대인관계": ["잘 빠진다", "샘이 많다", "잘난체하는 꼴을 못본다", "공주병·왕자병이 있다"],
-            "가족관계": ["나만 바라봐주기를 바란다", "\"놀아줘\"", "친밀하고 싶어한다", "영순위이기를 바란다"],
-            "일/공부": ["최고가 되려고한다", "나만 잘하면 된다", "샘통이다", "다른 사람을 인정하지 않는다"],
-            "강점": ["자존심이 있다", "감수성이 예민하다", "감정을 잘 알아차린다", "잘 낫는다"]
+            "대인관계": ["잘 삐진다", "샘이 많다", "잘난 체하는 꼴을 못 본다", "공주병·왕자병이 있다"],
+            "가족관계": ["나만 바라봐주기를 바란다", "\"놀아줘\"", "친밀해지고 싶어한다", "0순위이기를 바란다"],
+            "일/공부": ["최고가 되려고한다", "나만 잘하면 된다", "쌤통이다", "다른 사람을 인정하지 않는다"],
+            "강점": ["자존심이 있다", "감수성이 예민하다", "감정을 잘 알아차린다", "잘 났다"]
         }
     },
     {
@@ -1480,8 +1529,8 @@ const emotionsData = [
     {
         id: 11,
         categories: {
-            "대인관계": ["썰렁하게 한다", "무의미하게 만든다", "초월한척 한다", "힘빠지게한다"],
-            "가족관계": ["힘들게한다", "허기지게한다", "왕따 당한다"],
+            "대인관계": ["썰렁하게 한다", "무의미하게 만든다", "초월한척 한다", "힘 빠지게 한다"],
+            "가족관계": ["힘들게 한다", "허기지게 한다", "왕따 당한다"],
             "일/공부": ["의욕이 없다", "흥미가 없다", "게으르다"],
             "강점": ["경계가 없다", "욕심이 없다", "초연하다", "수용력이 있다"]
         }
@@ -1489,7 +1538,7 @@ const emotionsData = [
     {
         id: 12,
         categories: {
-            "대인관계": ["기대에 부응하려고 애쓴다", "조용하다", "사라지고 싶다", "공평하게대하지 않으면 슬퍼진다"],
+            "대인관계": ["기대에 부응하려고 애쓴다", "조용하다", "사라지고 싶다", "공평하게 대하지 않으면 슬퍼진다"],
             "가족관계": ["\"미안해\"를 입에 달고 산다", "감정을 꾹꾹 눌러 담는다", "기쁨조다", "필요한 존재가 되려고 노력한다"],
             "일/공부": ["실망시키지 않으려고 노력한다", "열심히 한다", "헌신적으로 한다"],
             "강점": ["알아서 잘한다", "다른 사람의 심정을 잘 헤아린다", "꺼이꺼이 잘 운다"]
@@ -1499,7 +1548,7 @@ const emotionsData = [
         id: 13,
         categories: {
             "대인관계": ["노심초사한다", "망설인다", "전전긍긍한다", "안절부절한다"],
-            "가족관계": ["확인전화를 자주한다", "잔소리가 많다", "강박적이다", "통제하려고 한다"],
+            "가족관계": ["확인 전화를 자주 한다", "잔소리가 많다", "강박적이다", "통제하려고 한다"],
             "일/공부": ["완벽하게 준비한다", "깔끔하다", "철저하게 계획한다"],
             "강점": ["순발력이 있다", "세세하게 표현한다", "분위기메이커다", "열정적이다", "솔직하고 투명하다"]
         }
@@ -1507,10 +1556,10 @@ const emotionsData = [
     {
         id: 14,
         categories: {
-            "대인관계": ["자기를 보호하기 위해 거리를 둔다", "위협을 느낄 때 관계를 끊는다", "속으로는 떨고있다", "'죽기살기' 심정이다"],
-            "가족관계": ["냉랭하게 대한다", "공포 분위기를 조성한다", "천진난만하다", "장난끼가 있다"],
+            "대인관계": ["자기를 보호하기 위해 거리를 둔다", "위협을 느낄 때 관계를 끊는다", "속으로는 떨고 있다", "'죽기살기' 심정이다"],
+            "가족관계": ["냉랭하게 대한다", "공포 분위기를 조성한다", "천진난만하다", "장난기가 있다"],
             "일/공부": ["빈틈없다", "꼼꼼하다", "한순간도 놓치지않는다", "끝장을 본다"],
-            "강점": ["창의적이다", "상상력과 아이디어가 풍부하다", "속내가 따뜻하다", "여리다", "리더쉽 있다"]
+            "강점": ["창의적이다", "상상력과 아이디어가 풍부하다", "속내가 따뜻하다", "여리다", "리더십 있다"]
         }
     },
     {
@@ -1518,14 +1567,14 @@ const emotionsData = [
         categories: {
             "대인관계": ["거리를 둔다", "단짝을 만든다", "무관심한 척한다", "먼저 다가와주길 바란다"],
             "가족관계": ["소원하다", "적막하다", "무미건조하다"],
-            "일/공부": ["제대로 하려고 한다", "완벽하게 하려한다", "시도가 어렵다", "비난을 두려워한다"],
+            "일/공부": ["제대로 하려고 한다", "완벽하게 하려 한다", "시도가 어렵다", "비난을 두려워한다"],
             "강점": ["완벽하다", "끈끈하다", "집중력 있다", "노골적으로 관심을 보인다"]
         }
     },
     {
         id: 16,
         categories: {
-            "대인관계": ["초긴장 상태다", "공격적이다", "아군 아니면 적군이다(아군은 별로없다)", "적개심을 드러내기 두려워 외면한다"],
+            "대인관계": ["초긴장 상태다", "공격적이다", "아군 아니면 적군이다(아군은 별로 없다)", "적개심을 드러내기 두려워 외면한다"],
             "가족관계": ["감정표현이 극단적이다", "삭막하다", "쓸쓸하다"],
             "일/공부": ["실패는 죽음이다", "죽기살기로 한다", "\"내가 죽든지 네가 죽든지 해보자\"는 심정이다"],
             "강점": ["올인한다", "목표지향적이다", "위기대처능력이 있다"]
