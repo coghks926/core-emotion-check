@@ -1169,62 +1169,68 @@
         /* ===== Large Text Override (Mobile Only) ===== */
         @media (max-width: 768px) {
             .header h1 { font-size: clamp(26px, 6.2vw, 34px) !important; }
-            .header .subtitle { font-size: clamp(16px, 3.4vw, 19px) !important; }
+            .header .subtitle { font-size: clamp(17px, 3.6vw, 20px) !important; }
 
             .section-header .title-main { font-size: clamp(23px, 5.4vw, 31px) !important; }
-            .section-header .subtitle-text { font-size: clamp(14px, 3vw, 17px) !important; }
+            .section-header .subtitle-text { font-size: clamp(16px, 3.2vw, 18px) !important; }
             .section-header .tag { font-size: clamp(12px, 2.1vw, 14px) !important; }
 
             .intro-section h2 { font-size: clamp(20px, 4.4vw, 25px) !important; }
-            .intro-section p { font-size: clamp(15px, 3vw, 17px) !important; line-height: 1.72 !important; }
+            .intro-section p { font-size: clamp(17px, 3.4vw, 19px) !important; line-height: 1.75 !important; }
 
             .info-title { font-size: clamp(16px, 3vw, 19px) !important; }
-            .info-item { font-size: clamp(14px, 2.8vw, 16px) !important; }
+            .info-item { font-size: clamp(16px, 3vw, 18px) !important; }
 
             .radio-label span,
             .consent-label,
-            .consent-box p { font-size: clamp(14px, 2.7vw, 16px) !important; }
-            .user-input, .user-select { font-size: 16px !important; }
+            .consent-box p { font-size: clamp(15px, 2.9vw, 17px) !important; }
+            .user-input, .user-select { font-size: 17px !important; }
 
-            .btn { font-size: clamp(15px, 3vw, 17px) !important; }
-            .progress-text { font-size: clamp(14px, 2.7vw, 16px) !important; }
-            .progress-percentage { font-size: clamp(15px, 3.1vw, 18px) !important; }
+            .btn { font-size: clamp(16px, 3.2vw, 18px) !important; }
+            .progress-text { font-size: clamp(15px, 2.9vw, 17px) !important; }
+            .progress-percentage { font-size: clamp(16px, 3.3vw, 19px) !important; }
 
             .emotion-name { font-size: clamp(16px, 3.1vw, 19px) !important; }
-            .emotion-checked-count { font-size: clamp(13px, 2.6vw, 15px) !important; }
+            .emotion-checked-count { font-size: clamp(14px, 2.8vw, 16px) !important; }
             .category-label { font-size: clamp(12px, 2.2vw, 14px) !important; }
-            .check-label { font-size: clamp(15px, 3.4vw, 18px) !important; line-height: 1.45 !important; }
-            .na-item .check-label { font-size: clamp(13px, 2.8vw, 15px) !important; }
+            .check-label { font-size: clamp(17px, 3.8vw, 20px) !important; line-height: 1.5 !important; }
+            .na-item .check-label { font-size: clamp(15px, 3vw, 17px) !important; }
 
-            .result-title { font-size: clamp(26px, 5.5vw, 34px) !important; }
+            .result-title { font-size: clamp(28px, 5.8vw, 36px) !important; }
             .top-emotions h3 { font-size: clamp(17px, 3.4vw, 21px) !important; }
-            .top-badge { font-size: clamp(14px, 2.9vw, 17px) !important; }
-            .insight-box h4 { font-size: clamp(16px, 3.1vw, 19px) !important; }
+            .top-badge { font-size: clamp(16px, 3.2vw, 18px) !important; }
+            .insight-box h4 { font-size: clamp(18px, 3.3vw, 20px) !important; }
             .insight-box p,
             .detail-list li,
             .strategy-input,
-            .completion-message { font-size: clamp(14px, 2.8vw, 16px) !important; }
-            .detail-emotion-block h5 { font-size: clamp(14px, 2.8vw, 16px) !important; }
+            .completion-message { font-size: clamp(16px, 3vw, 18px) !important; }
+            .detail-emotion-block h5 { font-size: clamp(16px, 3vw, 18px) !important; }
         }
 
         @media (max-width: 480px) {
-            .check-label { font-size: clamp(15px, 3.5vw, 17px) !important; }
-            .na-item .check-label { font-size: clamp(13px, 3vw, 15px) !important; }
+            .check-label { font-size: clamp(16px, 4vw, 18px) !important; }
+            .na-item .check-label { font-size: clamp(14px, 3.3vw, 16px) !important; }
+            .btn,
+            .actions-sticky .btn { font-size: 16px !important; }
+            .info-item,
+            .consent-label,
+            .intro-section p,
+            .completion-message { font-size: clamp(15px, 3.2vw, 17px) !important; }
+            .insight-box p,
+            .detail-list li,
+            .strategy-input { font-size: clamp(15px, 3.3vw, 17px) !important; }
+        }
+
+        @media (max-width: 360px) {
+            .check-label { font-size: 15px !important; }
             .btn,
             .actions-sticky .btn { font-size: 15px !important; }
             .info-item,
             .consent-label,
-            .intro-section p,
-            .completion-message { font-size: clamp(14px, 3vw, 16px) !important; }
-        }
-
-        @media (max-width: 360px) {
-            .check-label { font-size: 14px !important; }
-            .btn,
-            .actions-sticky .btn { font-size: 14px !important; }
-            .info-item,
-            .consent-label,
-            .intro-section p { font-size: 13px !important; }
+            .intro-section p { font-size: 14px !important; }
+            .insight-box p,
+            .detail-list li,
+            .strategy-input { font-size: 14px !important; }
         }
 
         @media print {
