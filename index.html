@@ -1440,7 +1440,7 @@
 
             <div class="actions actions-sticky">
                 <button class="btn btn-secondary" onclick="goTo('pageResult2')">← 이전</button>
-                <button class="btn" onclick="goTo('pageResult4')">실천 방안 →</button>
+                <button class="btn" onclick="goTo('pageResult4')">다음 →</button>
             </div>
         </div>
     </div>
@@ -1462,7 +1462,7 @@
 
             <div class="actions actions-sticky">
                 <button class="btn btn-secondary" onclick="goTo('pageResult3')">← 이전</button>
-                <button class="btn" onclick="goTo('pageComplete')">완료하기 →</button>
+                <button class="btn" onclick="submitCoreEmotion()">완료하기 →</button>
             </div>
         </div>
     </div>
@@ -1665,6 +1665,7 @@ const categoryClasses = {
 
 let strategies = Array(3).fill('');
 let strategyCount = 3;
+let userInfo = { gender: '', age: '' };
 
 function goTo(pageId) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -1681,6 +1682,7 @@ function startQuiz() {
     if (!age) { alert('연령대를 선택해 주세요.'); return; }
     if (!consent) { alert('개인정보 수집에 동의해 주세요.'); return; }
 
+    userInfo = { gender: gender.value, age };
     renderEmotionCards();
     goTo('pageQuiz');
 }
@@ -1920,12 +1922,56 @@ goTo = function(pageId) {
     origGoTo(pageId);
 };
 
+// 구글 시트 저장 URL (배포 후 /exec URL 입력)
+const CORE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxIt3Yi6gotGeJ88dnfntclMyYKe_4LJuZCp-zK1dfQckFwKXVbbGQYqu_1VbL98kAZ/exec';
+
+function submitCoreEmotion() {
+    goTo('pageComplete');
+    sendCoreEmotionToSheet();
+}
+
+function sendCoreEmotionToSheet() {
+    if (!CORE_SHEET_URL) return;
+
+    const top3Text = getResults()
+        .sort((a, b) => b.count - a.count)
+        .filter(r => r.count > 0)
+        .slice(0, 3)
+        .map((r, i) => `${i + 1}. ${r.name} (${r.count}개)`)
+        .join('\n');
+
+    const strategyText = strategies
+        .map(s => (s || '').trim())
+        .filter(s => s !== '')
+        .map((s, i) => `${i + 1}. ${s}`)
+        .join('\n');
+
+    const params = new URLSearchParams({
+        testType: 'coreEmotion',
+        gender: userInfo.gender || '',
+        age: userInfo.age || '',
+        top3Emotions: top3Text,
+        strategy: strategyText,
+        userAgent: navigator.userAgent || ''
+    });
+
+    fetch(CORE_SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        keepalive: true,
+        body: params
+    })
+    .then(() => console.log('핵심감정 데이터가 구글 시트에 저장되었습니다.'))
+    .catch(error => console.error('저장 오류:', error));
+}
+
 function resetAll() {
     document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
     document.querySelectorAll('.check-item').forEach(el => el.classList.remove('checked'));
     document.querySelectorAll('.emotion-card').forEach(el => el.classList.remove('has-checked'));
     strategies = Array(3).fill('');
     strategyCount = 3;
+    userInfo = { gender: '', age: '' };
 
     const ageEl = document.getElementById('u-age');
     const consentEl = document.getElementById('u-consent');
